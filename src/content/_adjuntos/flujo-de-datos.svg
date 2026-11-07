@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 170" role="img" aria-label="Un step escribe en GITHUB_OUTPUT, el job expone el valor en outputs y otro job lo lee con needs">
+  <rect width="640" height="170" fill="#ffffff"/>
+  <g font-family="system-ui, sans-serif" font-size="14" fill="#1c1917" text-anchor="middle">
+    <g fill="#eef2ff" stroke="#4338ca" stroke-width="2">
+      <rect x="10" y="45" width="180" height="80" rx="8"/>
+      <rect x="230" y="45" width="180" height="80" rx="8"/>
+      <rect x="450" y="45" width="180" height="80" rx="8"/>
+    </g>
+    <text x="100" y="78" font-weight="700">Step</text>
+    <text x="100" y="102">GITHUB_OUTPUT</text>
+    <text x="320" y="78" font-weight="700">Job A</text>
+    <text x="320" y="102">outputs</text>
+    <text x="540" y="78" font-weight="700">Job B</text>
+    <text x="540" y="102">needs.a.outputs.x</text>
+  </g>
+  <g stroke="#1c1917" stroke-width="2" fill="none">
+    <path d="M190 85h32m-8-6 8 6-8 6"/>
+    <path d="M410 85h32m-8-6 8 6-8 6"/>
+  </g>
+</svg>

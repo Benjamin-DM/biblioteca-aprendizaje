@@ -1,0 +1,28 @@
+---
+type Props = { dominios: { nombre: string; peso_min: number; peso_max: number }[] };
+const { dominios } = Astro.props;
+
+// Eje común: todas las barras se leen con la misma escala.
+const tope = Math.max(...dominios.map((d) => d.peso_max));
+const ancho = (valor: number) => `${(valor / tope) * 100}%`;
+---
+
+<ul class="mt-4 max-w-2xl space-y-3">
+  {
+    dominios.map((d) => (
+      <li>
+        <div class="flex justify-between gap-4 text-sm">
+          <span>{d.nombre}</span>
+          <span class="font-semibold whitespace-nowrap">
+            {d.peso_min}–{d.peso_max} %
+          </span>
+        </div>
+        <div class="relative mt-1 h-3" aria-hidden="true">
+          <div class="absolute inset-y-0 left-0 rounded-r bg-acento-suave" style={{ width: ancho(d.peso_max) }} />
+          <div class="absolute inset-y-0 left-0 bg-acento" style={{ width: ancho(d.peso_min) }} />
+        </div>
+      </li>
+    ))
+  }
+</ul>
+<p class="mt-3 text-sm text-tenue">Parte sólida: peso mínimo. Parte clara: hasta el peso máximo.</p>

@@ -1,0 +1,46 @@
+# Material propio: la guía oficial no define un calendario.
+fases:
+  - titulo: Escribir y leer workflows
+    semanas:
+      - numero: 1
+        titulo: Triggers y estructura
+        tareas:
+          - Estudiar las lecciones de triggers y estructura del workflow
+          - Hacer el lab de triggers e inputs
+          - Hacer el lab de matrix y service containers
+      - numero: 2
+        titulo: Salidas y diagnóstico
+        tareas:
+          - Estudiar ejecución y salidas, interpretar ejecuciones, y artefactos y logs
+          - Hacer el lab de outputs, cache y job summary
+          - Hacer el lab de diagnóstico de un workflow roto
+    gate: Terminar los 4 labs sin mirar la solución y sacar al menos 70 % en las preguntas de los dominios 1 y 2.
+  - titulo: Reutilizar y crear actions
+    semanas:
+      - numero: 3
+        titulo: Plantillas y reusable workflows
+        tareas:
+          - Estudiar plantillas de workflow
+          - Hacer el lab de reusable workflow
+          - Explicar sin notas la diferencia entre starter workflow, reusable workflow y composite action
+      - numero: 4
+        titulo: Actions propias
+        tareas:
+          - Estudiar crear actions, estructura y metadata, y distribuir actions
+          - Hacer el lab de composite action
+          - Hacer el lab de JavaScript action
+    gate: Tener una composite action y una JavaScript action funcionando con un tag de versión, y sacar al menos 70 % en las preguntas del dominio 3.
+  - titulo: Operar a escala con seguridad
+    semanas:
+      - numero: 5
+        titulo: Enterprise y runners
+        tareas:
+          - Estudiar gobierno de actions, runners a escala, y secretos y variables
+          - Hacer el lab de self-hosted runner
+      - numero: 6
+        titulo: Seguridad, optimización y repaso
+        tareas:
+          - Estudiar seguridad y rendimiento
+          - Hacer el lab de endurecer un workflow
+          - Repasar los dominios con menor puntaje y agendar el examen
+    gate: Sacar al menos 80 % en un intento completo con todas las preguntas, con cada dominio por encima de 70 %.

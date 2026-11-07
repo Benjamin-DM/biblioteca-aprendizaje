@@ -1,0 +1,10 @@
+preguntas:
+  - id: claves-obligatorias
+    enunciado: ¿Qué claves son obligatorias en action.yml?
+    opciones:
+      - name, inputs y outputs
+      - name, description y runs
+      - name, author y branding
+      - runs y outputs
+    correcta: 1
+    explicacion: Las claves obligatorias son name, description y runs. Las demás son opcionales.

@@ -1,0 +1,19 @@
+preguntas:
+  - id: script-injection
+    enunciado: Un step hace run con echo y el título del PR dentro de una expresión. ¿Cuál es la mitigación recomendada?
+    opciones:
+      - Usar comillas simples alrededor de la expresión
+      - Asignar el valor a una variable con env y usar la variable en el shell
+      - Guardarlo como secreto
+      - Usar otro shell
+    correcta: 1
+    explicacion: La expresión se expande antes de correr el shell. Por env, el shell recibe el valor como dato y no como código.
+  - id: oidc-permiso
+    enunciado: ¿Qué permiso necesita un job para pedir un token OIDC?
+    opciones:
+      - contents write
+      - actions write
+      - id-token write
+      - packages read
+    correcta: 2
+    explicacion: El job necesita id-token write para solicitar el token que cambia por credenciales temporales del cloud.

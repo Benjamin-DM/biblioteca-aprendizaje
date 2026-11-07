@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import { obtenerArbol, u } from '../lib/contenido';
+
+const cursos = await obtenerArbol();
+---
+
+<Base titulo="Inicio">
+  <h1 class="text-3xl font-bold">Biblioteca de Aprendizaje</h1>
+  <p class="mt-2 text-tenue">Rutas de estudio, lecciones, labs y quizzes para cada tema técnico.</p>
+  <h2 class="mt-8 text-xl font-bold">Tus cursos</h2>
+  <ul class="mt-3 space-y-2">
+    {
+      cursos.map((c) => (
+        <li>
+          <a class="enlace" href={u(c.ruta)}>
+            {c.entrada.data.titulo}
+          </a>
+          <span class="text-tenue"> · {c.area.data.nombre}</span>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="mt-6"><a class="enlace" href={u('biblioteca/')}>Ver y filtrar la biblioteca</a></p>
+</Base>

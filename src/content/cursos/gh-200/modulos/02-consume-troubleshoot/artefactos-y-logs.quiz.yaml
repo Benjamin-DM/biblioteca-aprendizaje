@@ -1,0 +1,10 @@
+preguntas:
+  - id: secreto-en-log
+    enunciado: Un secreto apareció sin enmascarar en un log. ¿Qué debes hacer?
+    opciones:
+      - Volver a ejecutar el workflow con debug
+      - Borrar el log y rotar el secreto
+      - Solo renombrar el secreto
+      - Nada, los logs son privados
+    correcta: 1
+    explicacion: La documentación indica borrar el log y rotar el secreto, porque hay que asumirlo expuesto.

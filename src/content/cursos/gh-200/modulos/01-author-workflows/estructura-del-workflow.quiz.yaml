@@ -1,0 +1,19 @@
+preguntas:
+  - id: matrix-include-exclude
+    enunciado: Una combinación aparece en exclude y también en include. ¿Qué ocurre?
+    opciones:
+      - El workflow falla al validar
+      - La combinación no corre
+      - La combinación corre, porque include se procesa después de exclude
+      - Corre dos veces
+    correcta: 2
+    explicacion: Todas las combinaciones de include se procesan después de exclude, por lo que pueden devolver una excluida.
+  - id: servicio-en-contenedor
+    enunciado: Un job corre dentro de un container y usa un service llamado redis. ¿Cómo llega al servicio?
+    opciones:
+      - Por localhost y el puerto mapeado
+      - Por el hostname redis
+      - Por la IP del runner
+      - No puede acceder a él
+    correcta: 1
+    explicacion: Dentro de un container, los servicios se alcanzan por su nombre. Desde el runner se usa localhost y el puerto mapeado.

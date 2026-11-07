@@ -1,0 +1,19 @@
+preguntas:
+  - id: output-entre-jobs
+    enunciado: ¿Qué hace falta para que el job b lea un valor calculado por un step del job a?
+    opciones:
+      - Escribirlo en GITHUB_ENV
+      - Escribirlo en GITHUB_OUTPUT, declararlo en outputs del job a y que b tenga needs a
+      - Escribirlo en GITHUB_STEP_SUMMARY
+      - Solo declarar needs a
+    correcta: 1
+    explicacion: GITHUB_ENV llega solo a los steps siguientes del mismo job. Entre jobs se usa outputs junto con needs.
+  - id: expiracion-cache
+    enunciado: ¿Cuándo elimina GitHub una entrada de cache?
+    opciones:
+      - Al terminar el workflow run
+      - Tras más de 7 días sin acceso, o al expulsarla por exceder el límite
+      - Siempre a las 24 horas
+      - Nunca, hay que borrarla a mano
+    correcta: 1
+    explicacion: Se eliminan las entradas sin acceso por más de 7 días, y también se expulsan si se excede el límite del repo.

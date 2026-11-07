@@ -1,0 +1,8 @@
+fases:
+  - titulo: Primera fase
+    semanas:
+      - numero: 1
+        titulo: Primera semana
+        tareas:
+          - Primera tarea
+    gate: Criterio para pasar a la siguiente fase.

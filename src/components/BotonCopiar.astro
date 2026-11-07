@@ -1,0 +1,27 @@
+<p id="aviso-copia" class="sr-only" role="status"></p>
+<script>
+  const aviso = document.querySelector('#aviso-copia')!;
+  for (const pre of document.querySelectorAll<HTMLPreElement>('.prose pre')) {
+    const envoltura = document.createElement('div');
+    envoltura.className = 'relative';
+    pre.replaceWith(envoltura);
+    envoltura.append(pre);
+
+    const boton = document.createElement('button');
+    boton.type = 'button';
+    boton.textContent = 'Copiar';
+    boton.className = 'absolute top-2 right-2 rounded border border-borde bg-superficie px-3 py-1 text-sm text-tinta';
+    boton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(pre.innerText);
+        boton.textContent = 'Copiado';
+        aviso.textContent = 'Código copiado';
+      } catch {
+        boton.textContent = 'No se pudo copiar';
+        aviso.textContent = 'No se pudo copiar el código';
+      }
+      setTimeout(() => (boton.textContent = 'Copiar'), 2000);
+    });
+    envoltura.append(boton);
+  }
+</script>

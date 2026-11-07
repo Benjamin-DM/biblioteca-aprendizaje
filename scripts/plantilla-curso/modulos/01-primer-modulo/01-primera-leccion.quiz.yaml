@@ -1,0 +1,8 @@
+preguntas:
+  - id: primera-pregunta
+    enunciado: Escribe aquí la pregunta.
+    opciones:
+      - Opción correcta
+      - Opción incorrecta
+    correcta: 0
+    explicacion: Explica por qué esa es la respuesta correcta.

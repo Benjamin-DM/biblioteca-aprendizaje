@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.astro/
+.env*
+# Configuración local de Obsidian al abrir src/content como vault
+src/content/.obsidian/
+src/content/.trash/

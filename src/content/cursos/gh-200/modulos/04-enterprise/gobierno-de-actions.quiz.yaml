@@ -1,0 +1,10 @@
+preguntas:
+  - id: nivel-politica
+    enunciado: El enterprise solo permite actions seleccionadas. Una organización quiere permitir todas. ¿Qué ocurre?
+    opciones:
+      - Rige la configuración de la organización
+      - Rige la del enterprise; el nivel superior limita al inferior
+      - Se combinan ambas listas
+      - Rige la del repo
+    correcta: 1
+    explicacion: Una organización no puede ser más permisiva que lo que el enterprise establece.

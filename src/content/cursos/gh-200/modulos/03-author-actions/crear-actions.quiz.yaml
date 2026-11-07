@@ -1,0 +1,10 @@
+preguntas:
+  - id: docker-linux
+    enunciado: Tu action debe correr en runners Linux, Windows y macOS. ¿Qué tipo descartas?
+    opciones:
+      - JavaScript
+      - Docker
+      - Composite con steps multiplataforma
+      - Ninguno
+    correcta: 1
+    explicacion: Las actions de Docker requieren un runner Linux.

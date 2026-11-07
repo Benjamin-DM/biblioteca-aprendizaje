@@ -1,0 +1,10 @@
+preguntas:
+  - id: limite-self-hosted
+    enunciado: ¿Cuánto puede durar como máximo un job en un self-hosted runner?
+    opciones:
+      - 6 horas
+      - 24 horas
+      - 5 días
+      - 35 días
+    correcta: 2
+    explicacion: Un job en self-hosted puede durar 5 días. En GitHub-hosted, 6 horas. 24 horas es el máximo en cola.

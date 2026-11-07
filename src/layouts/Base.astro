@@ -1,0 +1,76 @@
+---
+import '../styles/global.css';
+import { u } from '../lib/contenido';
+
+type Props = { titulo: string; descripcion?: string };
+const { titulo, descripcion = 'Biblioteca personal de aprendizaje técnico.' } = Astro.props;
+
+const actual = Astro.url.pathname;
+const enlaces = [
+  { texto: 'Inicio', href: u('') },
+  { texto: 'Biblioteca', href: u('biblioteca/') },
+];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={descripcion} />
+    <link rel="icon" href={u('favicon.svg')} type="image/svg+xml" />
+    <title>{titulo} · Biblioteca de Aprendizaje</title>
+    <!-- Antes del primer pintado, para que no parpadee el tema. -->
+    <script is:inline>
+      const guardado = localStorage.getItem('biblioteca:tema');
+      const oscuro = guardado ? guardado === 'oscuro' : matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.classList.toggle('dark', oscuro);
+    </script>
+  </head>
+  <body class="flex min-h-dvh flex-col">
+    <a href="#contenido" class="sr-only rounded bg-superficie p-2 focus:not-sr-only focus:absolute focus:top-2 focus:left-2">
+      Saltar al contenido
+    </a>
+    <header class="border-b border-borde bg-superficie">
+      <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-1 px-4 py-2">
+        <a href={u('')} class="py-2 font-bold">Biblioteca de Aprendizaje</a>
+        <nav aria-label="Principal" class="grow">
+          <ul class="flex gap-1">
+            {
+              enlaces.map((e) => (
+                <li>
+                  <a
+                    href={e.href}
+                    aria-current={actual === e.href || actual === e.href.replace(/\/$/, '') ? 'page' : undefined}
+                    class="inline-flex min-h-11 items-center rounded px-3 hover:underline aria-[current=page]:font-semibold aria-[current=page]:underline"
+                  >
+                    {e.texto}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <button id="tema" type="button" aria-pressed="false" class="min-h-11 rounded border border-borde px-3 text-sm">
+          Tema oscuro
+        </button>
+      </div>
+    </header>
+    <main id="contenido" class="mx-auto w-full max-w-6xl grow px-4 py-8">
+      <slot />
+    </main>
+    <footer class="border-t border-borde px-4 py-4 text-center text-sm text-tenue">
+      Tus datos se guardan solo en este navegador.
+    </footer>
+    <script>
+      const boton = document.querySelector<HTMLButtonElement>('#tema')!;
+      const pintar = () => boton.setAttribute('aria-pressed', String(document.documentElement.classList.contains('dark')));
+      pintar();
+      boton.addEventListener('click', () => {
+        const oscuro = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('biblioteca:tema', oscuro ? 'oscuro' : 'claro');
+        pintar();
+      });
+    </script>
+  </body>
+</html>

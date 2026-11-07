@@ -1,0 +1,19 @@
+preguntas:
+  - id: github-token-dispatch
+    enunciado: Un step usa GITHUB_TOKEN para disparar otros workflows. ¿Qué eventos crean un workflow run siempre?
+    opciones:
+      - push y pull_request
+      - workflow_dispatch y repository_dispatch
+      - schedule y workflow_call
+      - Ninguno, GITHUB_TOKEN nunca crea runs
+    correcta: 1
+    explicacion: Los eventos creados con GITHUB_TOKEN no crean runs, salvo workflow_dispatch y repository_dispatch.
+  - id: inputs-booleanos
+    enunciado: ¿Qué contexto conserva un input boolean de workflow_dispatch como booleano?
+    opciones:
+      - github.event.inputs
+      - env
+      - inputs
+      - vars
+    correcta: 2
+    explicacion: inputs preserva el tipo; github.event.inputs convierte los booleanos en texto.

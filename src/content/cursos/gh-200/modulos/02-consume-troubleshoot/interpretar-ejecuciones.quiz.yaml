@@ -1,0 +1,10 @@
+preguntas:
+  - id: rerun-parcial
+    enunciado: Repites un job específico de un run. ¿Qué pasa con los jobs que dependen de él?
+    opciones:
+      - Conservan su resultado anterior
+      - También se repiten
+      - Se cancelan
+      - Quedan esperando aprobación
+    correcta: 1
+    explicacion: GitHub también repite los jobs dependientes. Los no incluidos conservan sus outputs del intento anterior.

@@ -1,0 +1,10 @@
+preguntas:
+  - id: requisitos-marketplace
+    enunciado: ¿Cuál impide publicar una action en GitHub Marketplace?
+    opciones:
+      - Que el repo sea privado
+      - Que el repo tenga un README
+      - Que use tags semánticos
+      - Que sea de JavaScript
+    correcta: 0
+    explicacion: La action debe estar en un repo público, con un archivo de metadata en la raíz y un name único.

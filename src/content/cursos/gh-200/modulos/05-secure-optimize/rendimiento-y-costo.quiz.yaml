@@ -1,0 +1,10 @@
+preguntas:
+  - id: concurrency-cancela
+    enunciado: Quieres que un push nuevo cancele el CI en curso de la misma rama. ¿Qué usas?
+    opciones:
+      - timeout-minutes
+      - max-parallel
+      - concurrency con cancel-in-progress
+      - fail-fast
+    correcta: 2
+    explicacion: concurrency agrupa los runs, y cancel-in-progress cancela el que estaba corriendo en el mismo grupo.

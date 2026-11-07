@@ -1,0 +1,19 @@
+preguntas:
+  - id: starter-independiente
+    enunciado: Se corrige un bug en un starter workflow de la organización. ¿Qué pasa con los repos que ya lo usaron?
+    opciones:
+      - Reciben el arreglo automáticamente
+      - Nada, su copia es independiente
+      - Sus workflows fallan hasta actualizarse
+      - Reciben un PR automático
+    correcta: 1
+    explicacion: Un starter workflow se copia al crearlo. La copia no queda ligada al original.
+  - id: plantilla-privada
+    enunciado: El repo .github de una organización es privado. ¿Quién puede usar sus plantillas?
+    opciones:
+      - Todos los repos
+      - Solo repos públicos
+      - Solo repos privados, con acceso de lectura otorgado
+      - Solo repos internos
+    correcta: 2
+    explicacion: Las plantillas de un repo .github privado solo están disponibles para repos privados, y hay que dar acceso de lectura.

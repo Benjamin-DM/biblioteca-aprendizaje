@@ -1,0 +1,42 @@
+---
+import Catalogo from '../components/Catalogo';
+import Base from '../layouts/Base.astro';
+import { contarLabs, contarLecciones } from '../lib/arbol';
+import type { TarjetaCurso } from '../lib/catalogo';
+import { ETIQUETAS, obtenerArbol, obtenerAreas, u } from '../lib/contenido';
+
+const arbol = await obtenerArbol();
+const areas = (await obtenerAreas())
+  .map((a) => ({ id: a.id, ...a.data }))
+  .sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+
+const cursos: TarjetaCurso[] = arbol.map((c) => ({
+  id: c.slug,
+  titulo: c.entrada.data.titulo,
+  area: c.entrada.data.area,
+  nivel: c.entrada.data.nivel,
+  estado: c.entrada.data.estado,
+  tags: c.entrada.data.tags,
+  objetivo: c.entrada.data.objetivo,
+  lecciones: contarLecciones(c),
+  labs: contarLabs(c),
+  href: u(c.ruta),
+}));
+
+const opciones = (etiquetas: Record<string, string>) =>
+  Object.entries(etiquetas).map(([valor, texto]) => ({ valor, texto }));
+const tags = [...new Set(cursos.flatMap((c) => c.tags))].sort();
+---
+
+<Base titulo="Biblioteca" descripcion="Catálogo de áreas y cursos.">
+  <h1 class="mb-6 text-3xl font-bold">Biblioteca</h1>
+  <Catalogo
+    client:load
+    cursos={cursos}
+    areas={areas}
+    niveles={opciones(ETIQUETAS.nivel)}
+    estados={opciones(ETIQUETAS.estado)}
+    tags={tags}
+    etiquetas={ETIQUETAS}
+  />
+</Base>

@@ -1,0 +1,77 @@
+---
+import { render } from 'astro:content';
+import BotonCopiar from '../../../../components/BotonCopiar.astro';
+import Base from '../../../../layouts/Base.astro';
+import { vecinas, type Curso, type Leccion, type Modulo } from '../../../../lib/arbol';
+import { obtenerArbol, u } from '../../../../lib/contenido';
+
+export async function getStaticPaths() {
+  const cursos = await obtenerArbol();
+  return cursos.flatMap((curso) =>
+    curso.modulos.flatMap((modulo) =>
+      modulo.lecciones.map((leccion) => ({
+        params: { curso: curso.slug, modulo: modulo.slug, leccion: leccion.slug },
+        props: { curso, modulo, leccion },
+      })),
+    ),
+  );
+}
+
+const { curso, modulo, leccion } = Astro.props as { curso: Curso; modulo: Modulo; leccion: Leccion };
+const d = leccion.entrada.data;
+const { Content, headings } = await render(leccion.entrada);
+const indice = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const { anterior, siguiente } = vecinas(curso, modulo.slug, leccion.slug);
+---
+
+<Base titulo={d.titulo} descripcion={`${d.titulo}: ${curso.entrada.data.titulo}`}>
+  <nav aria-label="Migas de pan" class="text-sm">
+    <a class="enlace" href={u(curso.ruta)}>{curso.entrada.data.titulo}</a>
+    <span aria-hidden="true"> / </span>
+    <span>{modulo.entrada.data.titulo}</span>
+  </nav>
+  <div class="mt-2 lg:grid lg:grid-cols-[1fr_16rem] lg:gap-10">
+    <article class="min-w-0">
+      <h1 class="text-3xl font-bold">{d.titulo}</h1>
+      <p class="mt-2 text-sm text-tenue">{d.duracion_min} min</p>
+      <div class="prose mt-6">
+        <Content />
+      </div>
+      <BotonCopiar />
+    </article>
+    {
+      indice.length > 0 && (
+        <nav aria-label="Tabla de contenidos" class="order-first mt-6 self-start text-sm lg:order-last lg:sticky lg:top-4 lg:mt-0">
+          <h2 class="font-semibold">En esta lección</h2>
+          <ul class="mt-2 space-y-1">
+            {indice.map((h) => (
+              <li class:list={[{ 'pl-3': h.depth === 3 }]}>
+                <a class="enlace" href={`#${h.slug}`}>
+                  {h.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+  </div>
+  <nav aria-label="Lecciones vecinas" class="mt-10 flex flex-wrap justify-between gap-4 border-t border-borde pt-4">
+    {
+      anterior ? (
+        <a class="enlace" rel="prev" href={u(anterior.ruta)}>
+          ← {anterior.entrada.data.titulo}
+        </a>
+      ) : (
+        <span />
+      )
+    }
+    {
+      siguiente && (
+        <a class="enlace" rel="next" href={u(siguiente.ruta)}>
+          {siguiente.entrada.data.titulo} →
+        </a>
+      )
+    }
+  </nav>
+</Base>
