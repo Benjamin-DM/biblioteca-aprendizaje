@@ -85,6 +85,16 @@ Progreso, notas, sesiones, intentos y tarjetas se guardan en el `localStorage` d
 - **Ajustes > Importar** lo combina con lo que ya tienes: por cada dato gana el más reciente. Así pasas tus datos entre la PC y el celular.
 - Si borras los datos del navegador sin exportar, se pierden.
 
+## Seguridad
+
+Es un sitio estático, sin servidor ni login: no hay backend que tumbar ni credenciales que robar. Lo que se protege es el navegador del usuario (sus datos locales) y la cadena de build.
+
+- **CSP** generada por Astro (`security.csp` en `astro.config.mjs`) como `<meta>`, porque GitHub Pages no permite headers. Solo corren scripts del propio sitio, con hash; se bloquean scripts inyectados y de otros orígenes. Un script `is:inline` con `define:vars` no recibe hash: usa scripts normales del bundle.
+- **Sin iframes:** la página se oculta si la cargan dentro de uno (la `<meta>` no admite `frame-ancestors`).
+- **Importar** acepta solo JSON válido de hasta 5 MB y lo valida antes de tocar los datos.
+- **Cadena de suministro:** `npm ci` con lockfile, actions fijadas por SHA y Dependabot semanal con 7 días de espera antes de adoptar versiones nuevas.
+- **Datos personales:** nunca salen del navegador. Ojo: todos los sitios de Pages de una misma cuenta comparten el origen `<cuenta>.github.io`, y por eso también su `localStorage`. No publiques en esa cuenta páginas de terceros.
+
 ## Deploy
 
 GitHub Actions publica en GitHub Pages en cada push a `main`.

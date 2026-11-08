@@ -1,0 +1,24 @@
+# Actualizaciones de dependencias por PR; cada una pasa por el workflow PR antes de entrar a main.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    # Un paquete comprometido suele detectarse en pocos días: no adoptar versiones recién publicadas.
+    cooldown:
+      default-days: 7
+    groups:
+      dependencias:
+        patterns: ['*']
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    # Dependabot actualiza el SHA fijado y el comentario con la versión.
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ['*']

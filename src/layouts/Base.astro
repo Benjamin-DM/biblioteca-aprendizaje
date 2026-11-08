@@ -26,6 +26,8 @@ const enlaces = [
     <title>{titulo} · Biblioteca de Aprendizaje</title>
     <!-- Antes del primer pintado, para que no parpadee el tema. -->
     <script is:inline>
+      // Contra clickjacking: la CSP en <meta> no admite frame-ancestors, así que la página no se muestra dentro de un iframe.
+      if (window.top !== window.self) document.documentElement.hidden = true;
       const guardado = localStorage.getItem('biblioteca:tema');
       const oscuro = guardado ? guardado === 'oscuro' : matchMedia('(prefers-color-scheme: dark)').matches;
       document.documentElement.classList.toggle('dark', oscuro);

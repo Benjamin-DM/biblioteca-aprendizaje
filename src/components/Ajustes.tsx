@@ -34,6 +34,8 @@ export default function Ajustes({ cursos }: Props) {
   const importar = async (archivo: File | undefined) => {
     if (!archivo) return;
     try {
+      // localStorage admite unos 5 MB: un archivo mayor no cabe y leerlo entero solo cuelga la pestaña.
+      if (archivo.size > 5 * 1024 * 1024) throw new Error('El archivo supera 5 MB; no es un respaldo de esta app.');
       let datos: unknown;
       try {
         datos = JSON.parse(await archivo.text());
