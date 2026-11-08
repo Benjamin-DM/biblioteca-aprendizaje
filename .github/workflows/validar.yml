@@ -1,0 +1,88 @@
+# Validación compartida. La llaman pr.yml y deploy.yml: un PR y main corren exactamente los mismos pasos.
+name: Validar
+
+on:
+  workflow_call:
+    inputs:
+      publicar:
+        description: Sube dist como artifact de GitHub Pages.
+        type: boolean
+        default: false
+
+# Un reusable workflow solo puede reducir los permisos del job que lo llama; acá no necesita ninguno extra.
+permissions: {}
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    # Un build normal tarda pocos minutos; evita que un job colgado consuma los 360 por defecto.
+    timeout-minutes: 15
+    permissions:
+      contents: read # Solo lee el código.
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # El job no hace push: el token no queda guardado en .git/config.
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc # La misma versión que en local.
+          cache: npm # Cachea ~/.npm con la clave de package-lock.json.
+
+      - name: Instalar dependencias
+        run: npm ci # Respeta package-lock.json; falla si no coincide con package.json.
+
+      - id: lint
+        name: Lint
+        run: npm run lint
+
+      - id: tipos
+        name: Typecheck y esquema de contenido
+        run: npm run check # astro check valida tipos y el frontmatter/YAML contra los esquemas zod.
+
+      - id: tests
+        name: Tests
+        run: npm test
+
+      - id: build
+        name: Build y búsqueda
+        run: npm run build # Un enlace de Obsidian roto también falla acá.
+
+      - id: enlaces
+        name: Enlaces internos rotos
+        run: npm run check:links
+
+      - name: Subir artifact de Pages
+        if: inputs.publicar
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: dist
+
+      - name: Job summary
+        # always(): el resumen también aparece cuando un paso falla, que es cuando más se necesita.
+        if: always()
+        env:
+          # Los resultados pasan por env y no dentro del script: evita inyección de expresiones.
+          LINT: ${{ steps.lint.outcome }}
+          TIPOS: ${{ steps.tipos.outcome }}
+          TESTS: ${{ steps.tests.outcome }}
+          BUILD: ${{ steps.build.outcome }}
+          ENLACES: ${{ steps.enlaces.outcome }}
+        run: |
+          icono() { case "$1" in success) echo "✅";; failure) echo "❌";; skipped) echo "⏭️ omitido";; cancelled) echo "⛔ cancelado";; *) echo "$1";; esac; }
+          {
+            echo "## Validación"
+            echo
+            echo "| Paso | Resultado |"
+            echo "| --- | --- |"
+            echo "| Lint | $(icono "$LINT") |"
+            echo "| Typecheck y esquema | $(icono "$TIPOS") |"
+            echo "| Tests | $(icono "$TESTS") |"
+            echo "| Build | $(icono "$BUILD") |"
+            echo "| Enlaces internos | $(icono "$ENLACES") |"
+            if [ -d dist ]; then
+              echo
+              echo "Páginas generadas: $(find dist -name '*.html' | wc -l) · Tamaño de dist: $(du -sh dist | cut -f1)"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

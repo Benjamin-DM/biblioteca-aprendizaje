@@ -1,0 +1,40 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # Permite republicar a mano sin un commit nuevo.
+
+permissions: {}
+
+concurrency:
+  # Un solo deploy a la vez. No se cancela el que está en curso: cortarlo a medias puede dejar Pages a medio publicar.
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/validar.yml
+    with:
+      publicar: true
+
+  deploy:
+    needs: build # Solo publica si la validación completa pasó.
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write # Publicar el sitio.
+      id-token: write # deploy-pages se autentica con OIDC, sin secretos guardados.
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+
+      - name: Job summary
+        env:
+          URL: ${{ steps.deploy.outputs.page_url }}
+        run: echo "## Publicado en $URL" >> "$GITHUB_STEP_SUMMARY"

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import type { Grade } from 'ts-fsrs';
 import { actualizar } from '../lib/almacen';
 import { calificar, cola, describirIntervalo, NOTAS, previsiones, proximoVencimiento, type EstadoTarjeta, type Tarjeta } from '../lib/repaso';
-import { usarDoc } from '../lib/usarDoc';
+import { useDoc } from '../lib/useDoc';
 import ConCodigo from './ConCodigo';
 
 type Props = { tarjetas: Tarjeta[]; cursos: { slug: string; titulo: string }[] };
@@ -10,7 +10,7 @@ type Props = { tarjetas: Tarjeta[]; cursos: { slug: string; titulo: string }[] }
 const ORIGEN = { quiz: 'Pregunta de quiz', dato: 'Dato para memorizar', error: 'Tu log de errores' };
 
 export default function Repaso({ tarjetas, cursos }: Props) {
-  const doc = usarDoc();
+  const doc = useDoc();
   const [curso, setCurso] = useState('');
   const [revelada, setRevelada] = useState(false);
   const [aviso, setAviso] = useState('');

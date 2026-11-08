@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { actualizar, ahora } from '../lib/almacen';
 import { armar, formatoTiempo, puntuar, restante, type Pregunta, type PreguntaEnJuego, type Respuestas, type Resultado } from '../lib/quiz';
-import { usarDoc } from '../lib/usarDoc';
+import { useDoc } from '../lib/useDoc';
 import ConCodigo from './ConCodigo';
 
 type Curso = { slug: string; titulo: string; modulos: { clave: string; titulo: string }[] };
@@ -138,20 +138,22 @@ function Jugar({ juego, alTerminar }: { juego: Juego; alTerminar: (r: Respuestas
   const [i, setI] = useState(0);
   const [respuestas, setRespuestas] = useState<Respuestas>({});
   const [revelada, setRevelada] = useState(false);
-  const [quedan, setQuedan] = useState(juego.fin ? restante(juego.fin, Date.now()) : 0);
+  const [quedan, setQuedan] = useState(juego.fin ? restante(juego.fin, juego.inicio) : 0);
   const item = juego.items[i];
   const ultima = i === juego.items.length - 1;
   const practica = juego.modo === 'practica';
 
   // El temporizador lee las respuestas más recientes sin reiniciarse en cada clic, y cierra una sola vez.
-  const respuestasRef = useRef(respuestas);
-  respuestasRef.current = respuestas;
+  const respuestasRef = useRef<Respuestas>({});
   const cerrado = useRef(false);
-  const cerrar = (r: Respuestas) => {
-    if (cerrado.current) return;
-    cerrado.current = true;
-    alTerminar(r);
-  };
+  const cerrar = useCallback(
+    (r: Respuestas) => {
+      if (cerrado.current) return;
+      cerrado.current = true;
+      alTerminar(r);
+    },
+    [alTerminar],
+  );
 
   useEffect(() => {
     if (!juego.fin) return;
@@ -164,9 +166,13 @@ function Jugar({ juego, alTerminar }: { juego: Juego; alTerminar: (r: Respuestas
       }
     }, 1000);
     return () => clearInterval(t);
-  }, [juego.fin]);
+  }, [juego.fin, cerrar]);
 
-  const elegir = (original: number) => setRespuestas({ ...respuestas, [item.pregunta.id]: original });
+  const elegir = (original: number) => {
+    const nuevas = { ...respuestas, [item.pregunta.id]: original };
+    respuestasRef.current = nuevas;
+    setRespuestas(nuevas);
+  };
   const bien = respuestas[item.pregunta.id] === item.pregunta.correcta;
 
   return (
@@ -265,7 +271,7 @@ function Resumen({ juego, respuestas, resultado, alReiniciar }: { juego: Juego; 
 }
 
 function Historial() {
-  const doc = usarDoc();
+  const doc = useDoc();
   const intentos = [...doc.intentos].sort((a, b) => b.actualizado.localeCompare(a.actualizado)).slice(0, 10);
   if (intentos.length === 0) return null;
   return (

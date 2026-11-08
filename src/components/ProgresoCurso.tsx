@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { completados, porcentaje, proximaTarea } from '../lib/progreso';
 import type { ResumenCurso } from '../lib/resumen';
-import { usarDoc } from '../lib/usarDoc';
+import { useDoc } from '../lib/useDoc';
 import Barra from './Barra';
 
 /** Porcentaje del curso, próximo paso del roadmap y marca de completado en la lista de módulos. */
 export default function ProgresoCurso({ curso }: { curso: ResumenCurso }) {
-  const doc = usarDoc();
+  const doc = useDoc();
   const hechos = completados(doc, curso.items);
   const pct = porcentaje(hechos, curso.items.length);
   const tarea = proximaTarea(doc, curso.tareas);

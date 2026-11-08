@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { actualizar, ahora } from '../lib/almacen';
-import { usarDoc } from '../lib/usarDoc';
+import { useDoc } from '../lib/useDoc';
 
 type Props = { lab: string; curso: string };
 
 /** Errores del lab: cada uno se vuelve una tarjeta de repaso. */
 export default function LogErrores({ lab, curso }: Props) {
-  const doc = usarDoc();
+  const doc = useDoc();
   const [descripcion, setDescripcion] = useState('');
   const [correccion, setCorreccion] = useState('');
   const [aviso, setAviso] = useState('');

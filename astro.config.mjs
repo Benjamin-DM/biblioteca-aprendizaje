@@ -9,6 +9,7 @@ import { remarkObsidian } from './src/lib/remark-obsidian.mjs';
 const base = '/biblioteca-aprendizaje';
 
 export default defineConfig({
+  site: 'https://benjamin-dm.github.io',
   base,
   integrations: [react()],
   vite: { plugins: [tailwindcss()] },

@@ -69,11 +69,11 @@ description: "Tareas de Biblioteca de Aprendizaje"
 
 ## Fase de entrega 4: CI/CD y deploy
 
-- [ ] T040 [US8] Agregar lint con ESLint en `eslint.config.js`
-- [ ] T041 [US8] Crear `.github/workflows/pr.yml`: lint, typecheck, esquema, tests, build y enlaces rotos
-- [ ] T042 [US8] Crear `.github/workflows/deploy.yml` con SHA fijados, `permissions` mínimos, cache, `concurrency` y job summary
-- [ ] T043 [US8] Validar los workflows con `actionlint`
-- [ ] T044 Escribir `README.md`
+- [x] T040 [US8] Agregar lint con ESLint en `eslint.config.js`
+- [x] T041 [US8] Crear `.github/workflows/pr.yml`: lint, typecheck, esquema, tests, build y enlaces rotos
+- [x] T042 [US8] Crear `.github/workflows/deploy.yml` con SHA fijados, `permissions` mínimos, cache, `concurrency` y job summary
+- [x] T043 [US8] Validar los workflows con `actionlint`
+- [x] T044 Escribir `README.md`
 - [ ] T045 [US8] Crear el repo en la cuenta personal, hacer el primer deploy y probar un PR con enlace roto (con OK para el push)
 
 ## Fase de entrega 5: Modos de estudio

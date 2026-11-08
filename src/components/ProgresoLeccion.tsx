@@ -2,13 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { actualizar, ahora, hash } from '../lib/almacen';
 import { enlazarCasillas } from '../lib/casillas';
 import { registrarSesion, segundosDelTick, TICK_MS } from '../lib/sesiones';
-import { usarDoc } from '../lib/usarDoc';
+import { useDoc } from '../lib/useDoc';
 
 type Props = { id: string; curso: string };
 
 /** Marca de completado, notas, checklists y registro de la sesión de una lección o lab. */
 export default function ProgresoLeccion({ id, curso }: Props) {
-  const doc = usarDoc();
+  const doc = useDoc();
   const completada = Boolean(doc.lecciones[id]?.completada);
   const notaGuardada = doc.notas[id]?.texto ?? '';
   const [nota, setNota] = useState<string | null>(null);

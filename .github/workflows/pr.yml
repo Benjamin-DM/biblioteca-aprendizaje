@@ -1,0 +1,19 @@
+name: PR
+
+on:
+  pull_request:
+    branches: [main]
+
+# Sin permisos por defecto: cada job declara solo lo que usa.
+permissions: {}
+
+concurrency:
+  # Un push nuevo al mismo PR deja obsoleta la validación anterior; se cancela para no gastar minutos.
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validar:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/validar.yml

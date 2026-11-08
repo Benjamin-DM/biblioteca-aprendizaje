@@ -93,7 +93,7 @@ export default function Ajustes({ cursos }: Props) {
               importar(e.target.files?.[0]);
               e.target.value = '';
             }}
-            className="mt-2 block min-h-11 file:mr-3 file:min-h-11 file:cursor-pointer file:rounded-md file:border-2 file:border-acento file:bg-transparent file:px-4 file:font-semibold file:text-tinta"
+            className="mt-2 block min-h-11 w-full max-w-full file:mr-3 file:min-h-11 file:cursor-pointer file:rounded-md file:border-2 file:border-acento file:bg-transparent file:px-4 file:font-semibold file:text-tinta"
           />
           <label className="mt-3 flex items-start gap-2">
             <input type="checkbox" checked={reemplazar} onChange={(e) => setReemplazar(e.target.checked)} className="mt-1 size-4" />

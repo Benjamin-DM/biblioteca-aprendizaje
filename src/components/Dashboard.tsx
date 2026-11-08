@@ -1,6 +1,6 @@
 import type { ResumenCurso } from '../lib/resumen';
 import { completados, continuar, diasDeEstudio, diasHasta, fechaLocal, porcentaje, proximaTarea, racha } from '../lib/progreso';
-import { usarDoc, usarHoy } from '../lib/usarDoc';
+import { useDoc, useHoy } from '../lib/useDoc';
 import Barra from './Barra';
 
 function FechaMeta({ meta, hoy }: { meta: string; hoy: Date }) {
@@ -11,8 +11,8 @@ function FechaMeta({ meta, hoy }: { meta: string; hoy: Date }) {
 }
 
 export default function Dashboard({ cursos }: { cursos: ResumenCurso[] }) {
-  const doc = usarDoc();
-  const hoy = usarHoy();
+  const doc = useDoc();
+  const hoy = useHoy();
   const todos = cursos.flatMap((c) => c.items);
   const hechos = completados(doc, todos);
   const ultimo = continuar(doc, todos);
