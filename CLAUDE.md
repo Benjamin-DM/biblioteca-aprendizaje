@@ -16,8 +16,12 @@ Plataforma web personal para estudiar temas técnicos y medir qué métodos de e
 - Las specs viven en `specs/` de este repo: excepción aprobada a la regla general de specs en el vault.
 - Datos del examen GH-200: solo de la guía oficial o de docs.github.com. Lo demás se marca como material propio.
 
+## Trampas conocidas
+
+- Al cambiar el código de un plugin remark/rehype en `src/lib/`, borrar `node_modules/.astro/data-store.json` antes de construir: Astro cachea el Markdown renderizado y no detecta ese cambio.
+
 ## Git
 
-- Repo personal: el remote va en la cuenta personal, nunca en la organización. `gh` tiene activa la cuenta de trabajo por defecto; no usarla acá.
+- Repo personal en la cuenta **Benjamin-DM**: `git@github-personal:Benjamin-DM/biblioteca-aprendizaje.git` (alias SSH `github-personal`). Nunca la organización. `gh` tiene activa la cuenta de trabajo por defecto; no usarla acá.
 - Identidad local del repo, no la global (que es la de trabajo).
 - Commit y push solo con OK explícito. Sin firmas de autoría de Claude.

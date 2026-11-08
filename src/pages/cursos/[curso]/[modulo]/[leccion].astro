@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import BotonCopiar from '../../../../components/BotonCopiar.astro';
+import ProgresoLeccion from '../../../../components/ProgresoLeccion';
 import Base from '../../../../layouts/Base.astro';
 import { vecinas, type Curso, type Leccion, type Modulo } from '../../../../lib/arbol';
 import { obtenerArbol, u } from '../../../../lib/contenido';
@@ -38,6 +39,7 @@ const { anterior, siguiente } = vecinas(curso, modulo.slug, leccion.slug);
         <Content />
       </div>
       <BotonCopiar />
+      <ProgresoLeccion client:load id={leccion.entrada.id} curso={curso.slug} />
     </article>
     {
       indice.length > 0 && (

@@ -7,7 +7,9 @@ Archivo JSON con el documento completo de localStorage. Se fija en la fase 2; la
   "version": 1,
   "exportado": "2026-11-06T12:00:00.000Z",
   "lecciones": {},
+  "aperturas": {},
   "checklists": {},
+  "roadmap": {},
   "notas": {},
   "intentos": [],
   "tarjetas": {},
@@ -18,6 +20,13 @@ Archivo JSON con el documento completo de localStorage. Se fija en la fase 2; la
   "ajustes": {}
 }
 ```
+
+## Claves
+
+- `lecciones`: lecciones y labs completados, por id de contenido.
+- `aperturas`: última apertura de cada lección o lab. Va aparte de `lecciones` para que abrir algo en otro dispositivo no deshaga un completado al combinar.
+- `checklists`: `<id de lección>#<hash del texto>`. `roadmap`: `<curso>/roadmap#<hash de semana y tarea>`.
+- El tema no se exporta: es una preferencia del dispositivo.
 
 ## Reglas
 

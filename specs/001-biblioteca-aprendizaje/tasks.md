@@ -47,14 +47,14 @@ description: "Tareas de Biblioteca de Aprendizaje"
 
 ## Fase de entrega 2: Progreso y dashboard
 
-- [ ] T024 Implementar el almacén, migraciones y aviso de almacenamiento lleno en `src/lib/almacen.ts` con tests
-- [ ] T025 Implementar exportar e importar con combinación en `src/lib/respaldo.ts` con tests
-- [ ] T026 [US3] Hacer interactivos los checklists y marcar lección en `src/components/ProgresoLeccion.tsx`
-- [ ] T027 [US3] Agregar notas por lección en `src/components/Notas.tsx`
-- [ ] T028 [US3] Registrar sesiones básicas en `src/lib/sesiones.ts` con tests
-- [ ] T029 [US3] Reemplazar la portada por el dashboard en `src/components/Dashboard.tsx` con racha en `src/lib/racha.ts` y tests
-- [ ] T030 [US3] Mostrar el porcentaje del curso y el próximo paso del roadmap
-- [ ] T031 [US7] Crear la página de ajustes en `src/pages/ajustes.astro`: exportar, importar, resetear curso, tema
+- [x] T024 Implementar el almacén, migraciones y aviso de almacenamiento lleno en `src/lib/almacen.ts` con tests
+- [x] T025 Implementar exportar e importar con combinación en `src/lib/respaldo.ts` con tests
+- [x] T026 [US3] Hacer interactivos los checklists y marcar lección en `src/components/ProgresoLeccion.tsx`
+- [x] T027 [US3] Agregar notas por lección en `src/components/Notas.tsx`
+- [x] T028 [US3] Registrar sesiones básicas en `src/lib/sesiones.ts` con tests
+- [x] T029 [US3] Reemplazar la portada por el dashboard en `src/components/Dashboard.tsx` con racha en `src/lib/racha.ts` y tests
+- [x] T030 [US3] Mostrar el porcentaje del curso y el próximo paso del roadmap
+- [x] T031 [US7] Crear la página de ajustes en `src/pages/ajustes.astro`: exportar, importar, resetear curso, tema
 
 ## Fase de entrega 3: Quizzes, flashcards y búsqueda
 

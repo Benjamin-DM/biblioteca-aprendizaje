@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import { unified } from '@astrojs/markdown-remark';
 import tailwindcss from '@tailwindcss/vite';
-import { rehypeChecklist } from './src/lib/rehype-checklist.mjs';
+import { rehypeAccesible } from './src/lib/rehype-accesible.mjs';
 import { remarkObsidian } from './src/lib/remark-obsidian.mjs';
 
 // GitHub Pages sirve el sitio bajo el nombre del repo.
@@ -16,7 +16,7 @@ export default defineConfig({
     shikiConfig: { themes: { light: 'github-light', dark: 'github-dark' } },
     processor: unified({
       remarkPlugins: [[remarkObsidian, { base, raiz: 'src/content' }]],
-      rehypePlugins: [rehypeChecklist],
+      rehypePlugins: [rehypeAccesible],
     }),
   },
 });

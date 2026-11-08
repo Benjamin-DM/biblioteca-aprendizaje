@@ -1,0 +1,12 @@
+---
+import Ajustes from '../components/Ajustes';
+import Base from '../layouts/Base.astro';
+import { obtenerArbol } from '../lib/contenido';
+
+const cursos = (await obtenerArbol()).map((c) => ({ slug: c.slug, titulo: c.entrada.data.titulo }));
+---
+
+<Base titulo="Ajustes" descripcion="Respaldo, reseteo de cursos y tema.">
+  <h1 class="mb-6 text-3xl font-bold">Ajustes</h1>
+  <Ajustes client:only="react" cursos={cursos} />
+</Base>

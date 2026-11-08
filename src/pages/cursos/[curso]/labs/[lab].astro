@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import BotonCopiar from '../../../../components/BotonCopiar.astro';
+import ProgresoLeccion from '../../../../components/ProgresoLeccion';
 import Base from '../../../../layouts/Base.astro';
 import type { Curso, Lab, Modulo } from '../../../../lib/arbol';
 import { obtenerArbol, u } from '../../../../lib/contenido';
@@ -48,4 +49,5 @@ const dominio = modulo.entrada.data.dominio?.nombre;
       {d.criterio_hecho.map((c) => <li>{c}</li>)}
     </ul>
   </section>
+  <ProgresoLeccion client:load id={lab.entrada.id} curso={curso.slug} />
 </Base>

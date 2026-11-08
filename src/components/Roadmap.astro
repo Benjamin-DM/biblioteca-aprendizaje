@@ -1,11 +1,13 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { claveTarea } from '../lib/roadmap';
 
-type Props = { roadmap: CollectionEntry<'roadmaps'> };
-const { fases } = Astro.props.roadmap.data;
+type Props = { roadmap: CollectionEntry<'roadmaps'>; curso: string };
+const { roadmap, curso } = Astro.props;
+const { fases } = roadmap.data;
 ---
 
-<ol class="mt-4 space-y-6">
+<ol class="mt-4 space-y-6" data-roadmap>
   {
     fases.map((fase, i) => (
       <li class="rounded-lg border border-borde bg-superficie p-4">
@@ -18,9 +20,14 @@ const { fases } = Astro.props.roadmap.data;
               <h4 class="font-medium">
                 Semana {semana.numero}: {semana.titulo}
               </h4>
-              <ul class="mt-1 list-disc space-y-1 pl-5 text-sm">
+              <ul class="mt-1 space-y-1 text-sm">
                 {semana.tareas.map((tarea) => (
-                  <li>{tarea}</li>
+                  <li>
+                    <label class="flex gap-2">
+                      <input type="checkbox" disabled class="mt-1 size-4 shrink-0" data-clave={claveTarea(curso, semana.numero, tarea)} />
+                      <span>{tarea}</span>
+                    </label>
+                  </li>
                 ))}
               </ul>
             </li>
@@ -33,3 +40,8 @@ const { fases } = Astro.props.roadmap.data;
     ))
   }
 </ol>
+<script>
+  import { enlazarCasillas } from '../lib/casillas';
+  const casillas = [...document.querySelectorAll<HTMLInputElement>('[data-roadmap] input[data-clave]')];
+  enlazarCasillas(casillas, 'roadmap', (c) => c.dataset.clave!);
+</script>

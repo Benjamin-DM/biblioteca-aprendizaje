@@ -1,6 +1,8 @@
 ---
 import { render } from 'astro:content';
 import PesosDominio from '../../../components/PesosDominio.astro';
+import ProgresoCurso from '../../../components/ProgresoCurso';
+import { resumir } from '../../../lib/resumen';
 import Roadmap from '../../../components/Roadmap.astro';
 import Base from '../../../layouts/Base.astro';
 import { contarPreguntas, type Curso } from '../../../lib/arbol';
@@ -41,6 +43,7 @@ const fechaMeta = d.fecha_meta?.toLocaleDateString('es', { dateStyle: 'long', ti
       </ul>
     )
   }
+  <ProgresoCurso client:load curso={resumir(curso)} />
   <div class="prose mt-4"><Descripcion /></div>
 
   {
@@ -60,7 +63,7 @@ const fechaMeta = d.fecha_meta?.toLocaleDateString('es', { dateStyle: 'long', ti
         <h2 id="roadmap" class="text-2xl font-bold">
           Roadmap
         </h2>
-        <Roadmap roadmap={curso.roadmap} />
+        <Roadmap roadmap={curso.roadmap} curso={curso.slug} />
       </section>
     )
   }
@@ -87,6 +90,7 @@ const fechaMeta = d.fecha_meta?.toLocaleDateString('es', { dateStyle: 'long', ti
                             {l.entrada.data.titulo}
                           </a>
                           <span class="text-sm text-tenue"> · {l.entrada.data.duracion_min} min</span>
+                          <span class="text-sm font-semibold" data-estado-item={l.entrada.id} />
                         </li>
                       ))}
                     </ol>
@@ -102,6 +106,7 @@ const fechaMeta = d.fecha_meta?.toLocaleDateString('es', { dateStyle: 'long', ti
                             {l.entrada.data.titulo}
                           </a>
                           <span class="text-sm text-tenue"> · {l.entrada.data.duracion_min} min</span>
+                          <span class="text-sm font-semibold" data-estado-item={l.entrada.id} />
                         </li>
                       ))}
                     </ol>

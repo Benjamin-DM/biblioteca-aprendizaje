@@ -23,13 +23,15 @@ Un único documento bajo la clave `biblioteca:v1`. Formato: [contracts/formato-e
 
 | Entidad | Clave | Campos principales | Fusión al importar |
 |---------|-------|--------------------|--------------------|
-| Progreso de lección | id de lección | completada, abierta_en, actualizado | gana lo más reciente |
+| Progreso de lección o lab | id de contenido | completada, actualizado | gana lo más reciente |
+| Apertura | id de contenido | actualizado (fecha de apertura) | gana lo más reciente |
 | Checklist | id de lección + hash del texto | hecho, actualizado | gana lo más reciente |
+| Tarea del roadmap | curso + hash de semana y tarea | hecho, actualizado | gana lo más reciente |
 | Nota | id de lección | texto, actualizado | gana lo más reciente |
 | Intento de quiz | id | modo, fecha, preguntas, respuestas, puntaje, duración | unión por id |
 | Tarjeta | id de origen | origen, estado FSRS, vence, suspendida, actualizado | gana lo más reciente |
 | Error de lab | id | lab, descripción, fecha | unión por id |
-| Sesión | id | fecha, curso, lección, método, duración, foco, energía | unión por id |
+| Sesión | id | fecha, curso, lección, método, segundos activos, foco, energía | unión por id; gana lo más reciente |
 | Mini-quiz | id de sesión + intervalo | método, vence, puntaje, en_ventana, actualizado | gana lo más reciente |
 | Experimento | id | curso, métodos, asignación, activo, actualizado | gana lo más reciente |
 
