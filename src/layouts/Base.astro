@@ -9,6 +9,9 @@ const actual = Astro.url.pathname;
 const enlaces = [
   { texto: 'Inicio', href: u('') },
   { texto: 'Biblioteca', href: u('biblioteca/') },
+  { texto: 'Quiz', href: u('quiz/') },
+  { texto: 'Repaso', href: u('repaso/') },
+  { texto: 'Buscar', href: u('buscar/') },
   { texto: 'Ajustes', href: u('ajustes/') },
 ];
 ---
@@ -36,7 +39,7 @@ const enlaces = [
       <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-1 px-4 py-2">
         <a href={u('')} class="py-2 font-bold">Biblioteca de Aprendizaje</a>
         <nav aria-label="Principal" class="grow">
-          <ul class="flex gap-1">
+          <ul class="flex flex-wrap gap-x-1">
             {
               enlaces.map((e) => (
                 <li>

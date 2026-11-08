@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import { u } from '../lib/contenido';
+---
+
+<Base titulo="Buscar" descripcion="Búsqueda en todo el contenido.">
+  <h1 class="mb-6 text-3xl font-bold">Buscar</h1>
+  <div id="buscador" class="max-w-3xl" data-base={u('')}>
+    <p>El índice de búsqueda se genera con <code>npm run build</code>; en <code>npm run dev</code> no está disponible.</p>
+  </div>
+  <link rel="stylesheet" href={u('pagefind/pagefind-ui.css')} />
+  <script is:inline define:vars={{ base: u('') }}>
+    // Pagefind se genera después del build de Astro, así que se carga en el navegador y no lo procesa Vite.
+    const s = document.createElement('script');
+    s.src = `${base}pagefind/pagefind-ui.js`;
+    s.onload = () => {
+      document.querySelector('#buscador').innerHTML = '';
+      new PagefindUI({ element: '#buscador', baseUrl: base, showSubResults: true, showImages: false, resetStyles: false, autofocus: true });
+      // El campo de Pagefind solo trae title; un nombre explícito lo vuelve accesible.
+      document.querySelector('.pagefind-ui__search-input')?.setAttribute('aria-label', 'Buscar en todo el contenido');
+    };
+    document.head.append(s);
+  </script>
+</Base>
+
+<style is:global>
+  #buscador {
+    --pagefind-ui-primary: var(--acento);
+    --pagefind-ui-text: var(--tinta);
+    --pagefind-ui-background: var(--superficie);
+    --pagefind-ui-border: var(--borde);
+    --pagefind-ui-tag: var(--fondo);
+    --pagefind-ui-font: inherit;
+  }
+</style>

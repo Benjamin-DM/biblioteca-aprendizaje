@@ -19,7 +19,7 @@ export default function ProgresoCurso({ curso }: { curso: ResumenCurso }) {
 
   if (curso.items.length === 0) return null;
   return (
-    <section className="mt-6 max-w-md rounded-lg border border-borde bg-superficie p-4" aria-labelledby="t-progreso">
+    <section className="mt-6 max-w-md rounded-lg border border-borde bg-superficie p-4" aria-labelledby="t-progreso" data-pagefind-ignore>
       <h2 id="t-progreso" className="text-sm font-semibold text-tenue">
         Tu progreso
       </h2>

@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import BotonCopiar from '../../../../components/BotonCopiar.astro';
+import LogErrores from '../../../../components/LogErrores';
 import ProgresoLeccion from '../../../../components/ProgresoLeccion';
 import Base from '../../../../layouts/Base.astro';
 import type { Curso, Lab, Modulo } from '../../../../lib/arbol';
@@ -30,6 +31,7 @@ const dominio = modulo.entrada.data.dominio?.nombre;
     <span aria-hidden="true"> / </span>
     <span>{modulo.entrada.data.titulo}</span>
   </nav>
+  <div data-pagefind-body>
   <h1 class="mt-2 text-3xl font-bold">{d.titulo}</h1>
   <p class="mt-2 text-sm text-tenue">
     Lab · {d.duracion_min} min{dominio && ` · Dominio: ${dominio}`}
@@ -49,5 +51,7 @@ const dominio = modulo.entrada.data.dominio?.nombre;
       {d.criterio_hecho.map((c) => <li>{c}</li>)}
     </ul>
   </section>
+  </div>
   <ProgresoLeccion client:load id={lab.entrada.id} curso={curso.slug} />
+  <LogErrores client:only="react" lab={lab.entrada.id} curso={curso.slug} />
 </Base>

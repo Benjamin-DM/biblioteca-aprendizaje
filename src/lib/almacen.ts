@@ -20,6 +20,19 @@ export type Sesion = Registro & {
   energia?: number;
 };
 
+export type Intento = Registro & {
+  modo: 'practica' | 'examen';
+  preguntas: string[];
+  /** Índice original de la opción elegida, por id de pregunta. */
+  respuestas: Record<string, number>;
+  segundos: number;
+  correctas: number;
+  total: number;
+  porcentaje: number;
+  dominios: { dominio: string; correctas: number; total: number; porcentaje: number }[];
+};
+export type ErrorLab = Registro & { curso: string; lab: string; descripcion: string; correccion: string; descartado?: boolean };
+
 export type Doc = {
   version: number;
   /** Lecciones y labs completados. */
@@ -29,12 +42,13 @@ export type Doc = {
   checklists: Record<string, Casilla>;
   roadmap: Record<string, Casilla>;
   notas: Record<string, Nota>;
-  tarjetas: Record<string, Marca>;
+  /** Estado FSRS por id de tarjeta (ver repaso.ts). */
+  tarjetas: Record<string, Marca & Record<string, unknown>>;
   miniquizzes: Record<string, Marca>;
   experimentos: Record<string, Marca>;
   ajustes: Record<string, Marca>;
-  intentos: Registro[];
-  errores: Registro[];
+  intentos: Intento[];
+  errores: ErrorLab[];
   sesiones: Sesion[];
 };
 

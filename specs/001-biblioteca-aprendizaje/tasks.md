@@ -58,14 +58,14 @@ description: "Tareas de Biblioteca de Aprendizaje"
 
 ## Fase de entrega 3: Quizzes, flashcards y búsqueda
 
-- [ ] T032 [US4] Implementar puntaje, desglose e intercalado en `src/lib/quiz.ts` con tests
-- [ ] T033 [US4] Crear el modo práctica y examen en `src/components/Quiz.tsx`, con el tiempo calculado sobre la hora de fin
-- [ ] T034 [US4] Crear la página de quiz intercalado e historial en `src/pages/quiz.astro`
-- [ ] T035 [US5] Integrar FSRS en `src/lib/repaso.ts` con tests; medir el bundle
-- [ ] T036 [US5] Extraer tarjetas de quizzes y tablas "datos para memorizar" en `src/lib/tarjetas.ts` con tests
-- [ ] T037 [US5] Crear el repaso en `src/components/Repaso.tsx` y `src/pages/repaso.astro`
-- [ ] T038 [US5] Agregar el log de errores de labs en `src/components/LogErrores.tsx`
-- [ ] T039 [US6] Integrar Pagefind en el build y crear `src/components/Busqueda.astro`
+- [x] T032 [US4] Implementar puntaje, desglose e intercalado en `src/lib/quiz.ts` con tests
+- [x] T033 [US4] Crear el modo práctica y examen en `src/components/Quiz.tsx`, con el tiempo calculado sobre la hora de fin
+- [x] T034 [US4] Crear la página de quiz intercalado e historial en `src/pages/quiz.astro`
+- [x] T035 [US5] Integrar FSRS en `src/lib/repaso.ts` con tests; medir el bundle
+- [x] T036 [US5] Extraer tarjetas de quizzes y tablas "datos para memorizar" en `src/lib/tarjetas.ts` con tests
+- [x] T037 [US5] Crear el repaso en `src/components/Repaso.tsx` y `src/pages/repaso.astro`
+- [x] T038 [US5] Agregar el log de errores de labs en `src/components/LogErrores.tsx`
+- [x] T039 [US6] Integrar Pagefind en el build y crear `src/components/Busqueda.astro`
 
 ## Fase de entrega 4: CI/CD y deploy
 

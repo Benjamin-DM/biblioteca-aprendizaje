@@ -1,0 +1,15 @@
+---
+import Repaso from '../components/Repaso';
+import Base from '../layouts/Base.astro';
+import { obtenerArbol } from '../lib/contenido';
+import { tarjetasDe } from '../lib/estudio';
+
+const arbol = await obtenerArbol();
+const tarjetas = tarjetasDe(arbol);
+const cursos = arbol.map((c) => ({ slug: c.slug, titulo: c.entrada.data.titulo }));
+---
+
+<Base titulo="Repaso" descripcion="Tarjetas con repetición espaciada.">
+  <h1 class="mb-6 text-3xl font-bold">Repaso</h1>
+  <Repaso client:only="react" tarjetas={tarjetas} cursos={cursos} />
+</Base>

@@ -77,7 +77,7 @@ export default function ProgresoLeccion({ id, curso }: Props) {
   };
 
   return (
-    <section className="mt-10 border-t border-borde pt-6" aria-label="Tu progreso">
+    <section className="mt-10 border-t border-borde pt-6" aria-label="Tu progreso" data-pagefind-ignore>
       <button
         type="button"
         aria-pressed={completada}

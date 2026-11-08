@@ -32,9 +32,21 @@ const { anterior, siguiente } = vecinas(curso, modulo.slug, leccion.slug);
     <span>{modulo.entrada.data.titulo}</span>
   </nav>
   <div class="mt-2 lg:grid lg:grid-cols-[1fr_16rem] lg:gap-10">
-    <article class="min-w-0">
+    <article class="min-w-0" data-pagefind-body>
       <h1 class="text-3xl font-bold">{d.titulo}</h1>
-      <p class="mt-2 text-sm text-tenue">{d.duracion_min} min</p>
+      <p class="mt-2 text-sm text-tenue" data-pagefind-ignore>
+        {d.duracion_min} min
+        {
+          leccion.quiz && (
+            <>
+              ·{' '}
+              <a class="enlace" href={u(`quiz/?leccion=${encodeURIComponent(leccion.entrada.id)}`)}>
+                Practicar con {leccion.quiz.data.preguntas.length} {leccion.quiz.data.preguntas.length === 1 ? 'pregunta' : 'preguntas'}
+              </a>
+            </>
+          )
+        }
+      </p>
       <div class="prose mt-6">
         <Content />
       </div>

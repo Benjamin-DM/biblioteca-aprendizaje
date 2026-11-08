@@ -1,0 +1,21 @@
+---
+import Quiz from '../components/Quiz';
+import Base from '../layouts/Base.astro';
+import { obtenerArbol } from '../lib/contenido';
+import { preguntasDe } from '../lib/estudio';
+
+const arbol = await obtenerArbol();
+const preguntas = preguntasDe(arbol);
+const cursos = arbol
+  .map((c) => ({
+    slug: c.slug,
+    titulo: c.entrada.data.titulo,
+    modulos: c.modulos.map((m) => ({ clave: `${c.slug}/${m.slug}`, titulo: m.entrada.data.titulo })),
+  }))
+  .filter((c) => preguntas.some((p) => p.curso === c.slug));
+---
+
+<Base titulo="Quiz" descripcion="Quizzes en modo práctica o examen.">
+  <h1 class="mb-6 text-3xl font-bold">Quiz</h1>
+  <Quiz client:only="react" preguntas={preguntas} cursos={cursos} />
+</Base>
